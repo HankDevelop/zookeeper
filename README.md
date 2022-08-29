@@ -42,4 +42,8 @@ recent release at u211 or above.
 ## Contributing
 We always welcome new contributors to the project! See [How to Contribute](https://cwiki.apache.org/confluence/display/ZOOKEEPER/HowToContribute) for details on how to submit patch through pull request and our contribution workflow.
 
+## startUp Server
+org.apache.zookeeper.server.quorum.QuorumPeerMain D:\gitpro\zookeeper\conf\zoo1.cfg
 
+## startup client
+org.apache.zookeeper.ZooKeeperMain -server localhost:2191
