@@ -636,7 +636,7 @@ public class QuorumCnxManager {
             if (vsw != null) {
                 vsw.finish();
             }
-
+            // 远端sid放入map
             senderWorkerMap.put(sid, sw);
 
             queueSendMap.putIfAbsent(sid,

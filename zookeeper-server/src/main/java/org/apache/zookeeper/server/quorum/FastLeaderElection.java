@@ -875,6 +875,9 @@ public class FastLeaderElection implements Election {
      * Starts a new round of leader election. Whenever our QuorumPeer
      * changes its state to LOOKING, this method is invoked, and it
      * sends notifications to all other peers.
+     * 1、QuorumPeer中检测到当前Server LOOKING 状态时执行 当前Server从启动到获得确认Leader前一直为LOOKING状态
+     *      此处读取recvqueue中选票，并对选票状态进行判断，如果都是LOOKING投票阶段，则判断是否继续进行投票PK
+     *          如果是FOLLOWING, LEADING则根据原投票结果设置当前Server状态
      */
     public Vote lookForLeader() throws InterruptedException {
         try {
@@ -1018,6 +1021,7 @@ public class FastLeaderElection implements Election {
                          * together.
                          */
                         if(n.electionEpoch == logicalclock.get()){
+                            // 进行投票选举，投票结果处理
                             recvset.put(n.sid, new Vote(n.leader, n.zxid, n.electionEpoch, n.peerEpoch));
                             if(termPredicate(recvset, new Vote(n.version, n.leader,
                                             n.zxid, n.electionEpoch, n.peerEpoch, n.state))
@@ -1031,6 +1035,7 @@ public class FastLeaderElection implements Election {
                             }
                         }
 
+                        // 新的节点加入原有集群 投票结果处理
                         /*
                          * Before joining an established ensemble, verify that
                          * a majority are following the same leader.
