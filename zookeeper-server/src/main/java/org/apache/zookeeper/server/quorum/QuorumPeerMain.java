@@ -22,6 +22,7 @@ import java.io.IOException;
 import javax.management.JMException;
 import javax.security.sasl.SaslException;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.yetus.audience.InterfaceAudience;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +78,7 @@ public class QuorumPeerMain {
      * @param args path to the configfile
      */
     public static void main(String[] args) {
+        PropertyConfigurator.configure("D:\\workspace\\git\\zookeeper\\conf\\log4j.properties");
         QuorumPeerMain main = new QuorumPeerMain();
         try {
             main.initializeAndRun(args);

@@ -525,6 +525,12 @@ public class ClientCnxn {
                      Long.toHexString(getSessionId()));
         }
 
+        /**
+         * 三类消息处理
+         * 1、WatcherSetEventPair
+         * 2、LocalCallback
+         * 3、Packet 网络数据包
+         */
        private void processEvent(Object event) {
           try {
               if (event instanceof WatcherSetEventPair) {
